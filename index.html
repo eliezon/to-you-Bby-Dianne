@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You Are My Everything</title>
+  <style>
+    /* General Styles */
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap');
+    body {
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e);
+      background-size: 400% 400%;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      animation: gradientBG 10s ease infinite;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      animation: zoomIn 1s ease-in-out;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: slideDown 1s ease;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin: 10px 0;
+      animation: fadeInText 1.5s ease;
+    }
+
+    button {
+      background: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 10px 30px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Heart Animation */
+    .heart-animation {
+      font-size: 3rem;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    /* Background Floating Hearts */
+    .floating-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .floating-hearts span {
+      position: absolute;
+      display: block;
+      font-size: 20px;
+      animation: float 10s linear infinite, rotateHeart 4s infinite;
+    }
+
+    /* Confetti Animation */
+    .confetti {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0.8;
+      animation: confettiFall 3s linear infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeInText {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    @keyframes rotateHeart {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(20deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* Confetti falling effect */
+    @keyframes confettiFall {
+      0% { top: -10%; opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-hearts">
+    <span style="left: 10%; animation-duration: 15s;">❤️</span>
+    <span style="left: 20%; animation-duration: 12s;">❤️</span>
+    <span style="left: 30%; animation-duration: 18s;">❤️</span>
+    <span style="left: 40%; animation-duration: 14s;">❤️</span>
+    <span style="left: 50%; animation-duration: 20s;">❤️</span>
+    <span style="left: 60%; animation-duration: 16s;">❤️</span>
+    <span style="left: 70%; animation-duration: 13s;">❤️</span>
+    <span style="left: 80%; animation-duration: 19s;">❤️</span>
+    <span style="left: 90%; animation-duration: 17s;">❤️</span>
+  </div>
+
+  <!-- Falling Heart Confetti -->
+  <div class="confetti" style="left: 5%; animation-delay: 0s;">❤️</div>
+  <div class="confetti" style="left: 15%; animation-delay: 1s;">❤️</div>
+  <div class="confetti" style="left: 25%; animation-delay: 2s;">❤️</div>
+  <div class="confetti" style="left: 35%; animation-delay: 3s;">❤️</div>
+  <div class="confetti" style="left: 45%; animation-delay: 4s;">❤️</div>
+  <div class="confetti" style="left: 55%; animation-delay: 5s;">❤️</div>
+  <div class="confetti" style="left: 65%; animation-delay: 6s;">❤️</div>
+  <div class="confetti" style="left: 75%; animation-delay: 7s;">❤️</div>
+  <div class="confetti" style="left: 85%; animation-delay: 8s;">❤️</div>
+
+  <div class="container">
+    <div id="page1" class="page active">
+      <h1>Welcome, My Love ❤️</h1>
+      <p>You are the most beautiful person in my life.</p>
+      <button onclick="nextPage(2)">Click to See More</button>
+    </div>
+
+    <div id="page2" class="page">
+      <h1>You Are Special 🌟</h1>
+      <p>Every moment with you feels like a dream.</p>
+      <p>Your smile lights up my world.</p>
+      <button onclick="nextPage(3)">Next</button>
+    </div>
+
+    <div id="page3" class="page">
+      <h1>I Love You So Much 💖</h1>
+      <p>You are my everything, and I can't imagine life without you.</p>
+      <p>Will you make me the happiest person and be my wife?</p>
+      <button onclick="nextPage(4)">Yes, I Will!</button>
+    </div>
+    
+    <div id="page4" class="page">
+        <h1>You Said Yes! 🎉</h1>
+        <p>I promise to love you forever and always.</p>
+        <p>You are my soulmate, my best friend, and my future wife.<br><br><span style="font-size:18px;color:red">I Love Youuuu Soooo Muuchh <br>Mwaaamwaaaa🤗😚</span><br><br>
+          <span style="font-family:arial;font-size:12px">Your future husband: <span style="color:red">Mark Eliezon U. Aniñon</span></span>
+        </></p>
+        <div class="heart-animation">❤️</div>
+      </div>
+  </div>
+
+  <script>
+    function nextPage(pageNumber) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+      const nextPage = document.getElementById(`page${pageNumber}`);
+      nextPage.classList.add('active');
+    }
+  </script>
+</body>
+</html>
