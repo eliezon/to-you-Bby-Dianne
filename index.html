@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,7 +72,88 @@
       box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
     }
 
-    /* Heart Animation */
+    /* Image Gallery */
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+      animation: fadeInGallery 2s ease;
+    }
+
+    .image-gallery img {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .image-gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInGallery {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  
+  /* Heart Animation */
     .heart-animation {
       font-size: 3rem;
       animation: heartbeat 1.5s infinite;
@@ -146,10 +228,72 @@
     @keyframes confettiFall {
       0% { top: -10%; opacity: 1; }
       100% { top: 100%; opacity: 0; }
+    }.      width: 400px;
+      overflow: hidden;
+      margin: 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .slider-wrapper {
+      display: flex;
+      gap: 5px;
+      transition: transform 0.5s ease;
+    }
+
+    .slider-wrapper img {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .slider-wrapper img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      max-width: 80%;
+      max-height: 80%;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .close-btn:hover {
+      background-color: rgba(0, 0, 0, 0.9);
     }
   </style>
 </head>
-<body>
+
+<body> 
   <div class="floating-hearts">
     <span style="left: 10%; animation-duration: 15s;">❤️</span>
     <span style="left: 20%; animation-duration: 12s;">❤️</span>
@@ -172,7 +316,7 @@
   <div class="confetti" style="left: 65%; animation-delay: 6s;">❤️</div>
   <div class="confetti" style="left: 75%; animation-delay: 7s;">❤️</div>
   <div class="confetti" style="left: 85%; animation-delay: 8s;">❤️</div>
-
+  
   <div class="container">
     <div id="page1" class="page active">
       <h1>Welcome, My Love ❤️</h1>
@@ -181,36 +325,78 @@
     </div>
 
     <div id="page2" class="page">
-      <h1>You Are Special 🌟</h1>
-      <p>Every moment with you feels like a dream.</p>
-      <p>Your smile lights up my world.</p>
+      <h1>Beautiful Moments 📸</h1>
+      <p>Here are some memories we made together:</p>
+<div class="image-slider">
+      <div class="slider-wrapper">
+        <img src="d2.jpg" alt="Memory 1" onclick="openModal(this)">
+        <img src="d1.jpg" alt="Memory 2" onclick="openModal(this)">
+        <img src="d3.jpg" alt="Memory 3" onclick="openModal(this)">
+        <img src="d5.jpg" alt="Memory 5" onclick="openModal(this)">
+        <img src="d7.jpg" alt="Memory 6" onclick="openModal(this)">
+        <img src="d6.jpg" alt="Memory 7" onclick="openModal(this)">
+      </div>
+    </div><br>
       <button onclick="nextPage(3)">Next</button>
     </div>
 
+    
+    
     <div id="page3" class="page">
-      <h1>I Love You So Much 💖</h1>
-      <p>You are my everything, and I can't imagine life without you.</p>
-      <p>Will you make me the happiest person and be my wife?</p>
-      <button onclick="nextPage(4)">Yes, I Will!</button>
+      <h1>You Are Special 🌟</h1>
+      <p>Every moment with you feels like a dream.</p>
+      <p>Your smile lights up my world.</p>
+      <button onclick="nextPage(4)">Next</button>
     </div>
     
     <div id="page4" class="page">
-        <h1>You Said Yes! 🎉</h1>
-        <p>I promise to love you forever and always.</p>
-        <p>You are my soulmate, my best friend, and my future wife.<br><br><span style="font-size:18px;color:red">I Love You So Much bby Dianneee<br>Mwaaamwaaaa🤗😚</span><br><br>
-          <span style="font-family:arial;font-size:12px">Your future husband: <span style="color:red">Mark Eliezon U. Aniñon</span></span>
-        </></p>
-        <div class="heart-animation">❤️</div>
-      </div>
+      <h1>I Love You So Much 💖</h1>
+      <p>You are my everything, and I can't imagine life without you.</p>
+      <p>Will you make me the happiest person and be my wife?</p>
+      <button onclick="nextPage(5)">Yes, I Will!</button>
+    </div>
+
+    <div id="page5" class="page">
+      <h1>You Said Yes! 🎉</h1>
+      <p>I promise to love you forever and always.</p>
+      <p>You are my soulmate, my best friend, and my future wife.<br><br><span style="font-size:18px;color:red">I Love Youuuu Soooo
+          Muuchh <br>Mwaaamwaaaa🤗😚</span><br><br>
+        <span style="font-family:arial;font-size:12px">Your future husband: <span style="color:red">Mark Eliezon U.
+            Aniñon</span></span>
+      </p>
+      <div class="heart-animation">❤️</div>
+    </div>
   </div>
+  
+  <div id="imageModal" class="modal">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+    function openModal(imageElement) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      
+      modal.style.display = "flex";
+      modalImage.src = imageElement.src;
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = "none";
+    }
+  </script>
 
   <script>
     function nextPage(pageNumber) {
       const pages = document.querySelectorAll('.page');
-      pages.forEach(page => page.classList.remove('active'));
+   
+   pages.forEach(page => page.classList.remove('active'));
       const nextPage = document.getElementById(`page${pageNumber}`);
       nextPage.classList.add('active');
     }
   </script>
 </body>
-</html>
+
+  </html>
