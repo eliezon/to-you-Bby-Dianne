@@ -10,13 +10,18 @@
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap');
     body {
       font-family: 'Dancing Script', cursive;
-      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e);
-      background-size: 400% 400%;
+      /* background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e); */
+      background-image: url(images/images1.jpeg);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      /* background-size: 400% 400%; */
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      width: 100%;
       margin: 0;
       overflow: hidden;
       animation: gradientBG 10s ease infinite;
@@ -25,7 +30,7 @@
 
     .container {
       text-align: center;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgb(255, 0, 106);
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -56,7 +61,7 @@
     }
 
     button {
-      background: #ff6f61;
+      background: rgb(192, 98, 230);
       color: #fff;
       border: none;
       padding: 10px 30px;
@@ -225,30 +230,26 @@
     @keyframes confettiFall {
       0% { top: -10%; opacity: 1; }
       100% { top: 100%; opacity: 0; }
-    }.      width: 400px;
-      overflow: hidden;
-      margin: 0 auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .slider-wrapper {
       display: flex;
-      gap: 5px;
+      gap: 10px;
       transition: transform 0.5s ease;
     }
 
     .slider-wrapper img {
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       cursor: pointer;
       transition: transform 0.3s ease;
     }
-
+    
     .slider-wrapper img:hover {
       transform: scale(1.1);
+     
     }
 
     /* Modal Styles */
@@ -266,8 +267,8 @@
     }
 
     .modal-content {
-      max-width: 80%;
-      max-height: 80%;
+      max-width: 90%;
+      max-height: 90%;
     }
 
     .close-btn {
@@ -279,14 +280,42 @@
       border: none;
       font-size: 24px;
       cursor: pointer;
-      padding: 10px;
+      padding: 2px 10px;
       border-radius: 50%;
       z-index: 1;
     }
 
     .close-btn:hover {
       background-color: rgba(0, 0, 0, 0.9);
+      transform:translate(0,0) !important;
     }
+    /* Butterfly Animation */
+.button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.butterfly {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0;
+  animation: flyAway 2s linear forwards;
+}
+
+@keyframes flyAway {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x, 100px), var(--y, -100px));
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
 
@@ -318,7 +347,8 @@
     <div id="page1" class="page active">
       <h1>Welcome, My Love ❤️</h1>
       <p>You are the most beautiful person in my life.</p>
-      <button onclick="nextPage(2)">Click to See More</button>
+      <br>
+      <button onclick="nextPage(2)" onmouseover="createButterflies(event)">Click to See More</button>
     </div>
 
     <div id="page2" class="page">
@@ -334,7 +364,7 @@
         <img src="d6.jpg" alt="Memory 7" onclick="openModal(this)">
       </div>
     </div><br>
-      <button onclick="nextPage(3)">Next</button>
+      <button onclick="nextPage(3)"onmouseover="createButterflies(event)">Next</button>
     </div>
 
     
@@ -343,34 +373,60 @@
       <h1>You Are Special 🌟</h1>
       <p>Every moment with you feels like a dream.</p>
       <p>Your smile lights up my world.</p>
-      <button onclick="nextPage(4)">Next</button>
+      <br>
+      <button onclick="nextPage(4)"onmouseover="createButterflies(event)">Next</button>
     </div>
     
     <div id="page4" class="page">
       <h1>I Love You So Much 💖</h1>
       <p>You are my everything, and I can't imagine life without you.</p>
       <p>Will you make me the happiest person and be my wife?</p>
-      <button onclick="nextPage(5)">Yes, I Will!</button>
+      <br>
+      <button onclick="nextPage(5)"onmouseover="createButterflies(event)">Yes, I Will!</button>
     </div>
 
     <div id="page5" class="page">
       <h1>You Said Yes! 🎉</h1>
       <p>I promise to love you forever and always.</p>
-      <p>You are my soulmate, my best friend, and my future wife.<br><br><span style="font-size:18px;color:red">I Love Youuuu Soooo
-          Muuchh <br>Mwaaamwaaaa🤗😚</span><br><br>
-        <span style="font-family:arial;font-size:12px">Your future husband: <span style="color:red">Mark Eliezon U.
-            Aniñon</span></span>
+      <p>You are my soulmate, my best friend, and my future wife.<br><br><span style="font-size:18px;color:rgb(221, 175, 240)"><b>I Love You So
+          Muchh Bby Dianneee</Data><br>Mwaaamwaaaa</b>🤗😚</span><br><br>
+        <span style="font-family:arial;font-size:12px">Your future husband: <span style="color:rgb(221, 175, 240)"><b>Mark Eliezon U.
+            Aniñon</b></span></span>
       </p>
       <div class="heart-animation">❤️</div>
     </div>
   </div>
   
   <div id="imageModal" class="modal">
-    <span class="close-btn" onclick="closeModal()">×</span>
+    <button class="close-btn" onclick="closeModal()">×</button>
     <img class="modal-content" id="modalImage">
   </div>
 
+<!-- Add this audio element inside the <body> -->
+  <audio id="bgMusic" loop>
+    <source src="The 1975 - About You (Official).mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+  
   <script>
+    function nextPage(pageNumber) {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.classList.remove('active'));
+  const nextPage = document.getElementById(`page${pageNumber}`);
+  nextPage.classList.add('active');
+
+  // Play music when page 2 is displayed, starting at 30 seconds ahead
+  const bgMusic = document.getElementById('bgMusic');
+  if (pageNumber === 2 && bgMusic.paused) {
+    bgMusic.currentTime = 30; // Start music at 30 seconds
+    bgMusic.play();
+  }
+}
+
+  </script>
+  
+
+  <script>  
     function openModal(imageElement) {
       const modal = document.getElementById('imageModal');
       const modalImage = document.getElementById('modalImage');
@@ -386,13 +442,31 @@
   </script>
 
   <script>
-    function nextPage(pageNumber) {
-      const pages = document.querySelectorAll('.page');
-   
-   pages.forEach(page => page.classList.remove('active'));
-      const nextPage = document.getElementById(`page${pageNumber}`);
-      nextPage.classList.add('active');
-    }
+    function createButterflies(event) {
+  const button = event.target;
+  for (let i = 0; i < 10; i++) {
+    const butterfly = document.createElement("span");
+    butterfly.textContent = "🦋"; // Butterfly emoji
+    butterfly.classList.add("butterfly");
+
+    // Random position near button
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * -150;
+    
+    butterfly.style.setProperty("--x", `${x}px`);
+    butterfly.style.setProperty("--y", `${y}px`);
+    butterfly.style.left = `${Math.random() * 100}%`;
+    butterfly.style.top = `${Math.random() * 100}%`;
+
+    button.parentElement.appendChild(butterfly);
+
+    // Remove the butterfly after animation
+    setTimeout(() => {
+      butterfly.remove();
+    }, 2000);
+  }
+}
+
   </script>
 </body>
 
