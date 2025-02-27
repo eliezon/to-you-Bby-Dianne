@@ -139,6 +139,82 @@
             10% { opacity: 1; }
             100% { transform: translateY(-50px) rotate(-45deg); opacity: 0; }
         }
+        .button-container {
+    position: relative;
+    overflow: visible; /* Allow butterflies to fly outside */
+}
+
+.butterfly {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff66cc"%3E%3Cpath d="M12 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-7 6c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm14 0c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm-7 5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/%3E%3C/svg%3E') no-repeat center;
+    background-size: cover;
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.butterfly:nth-child(1) {
+    bottom: 0;
+    left: 0;
+}
+
+.butterfly:nth-child(2) {
+    bottom: 0;
+    right: 0;
+}
+
+.butterfly:nth-child(3) {
+    top: 0;
+    left: 0;
+}
+
+.butterfly:nth-child(4) {
+    top: 0;
+    right: 0;
+}
+
+.button:hover ~ .butterfly:nth-child(1) {
+    animation: fly1 2s ease-in-out forwards;
+}
+
+.button:hover ~ .butterfly:nth-child(2) {
+    animation: fly2 2s ease-in-out forwards;
+}
+
+.button:hover ~ .butterfly:nth-child(3) {
+    animation: fly3 2s ease-in-out forwards;
+}
+
+.button:hover ~ .butterfly:nth-child(4) {
+    animation: fly4 2s ease-in-out forwards;
+}
+
+@keyframes fly1 {
+    0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+    50% { opacity: 1; transform: translate(-50px, -80px) rotate(30deg); }
+    100% { opacity: 0; transform: translate(-100px, -150px) rotate(60deg); }
+}
+
+@keyframes fly2 {
+    0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+    50% { opacity: 1; transform: translate(50px, -80px) rotate(-30deg); }
+    100% { opacity: 0; transform: translate(100px, -150px) rotate(-60deg); }
+}
+
+@keyframes fly3 {
+    0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+    50% { opacity: 1; transform: translate(-40px, 50px) rotate(45deg); }
+    100% { opacity: 0; transform: translate(-80px, 100px) rotate(90deg); }
+}
+
+@keyframes fly4 {
+    0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+    50% { opacity: 1; transform: translate(40px, 50px) rotate(-45deg); }
+    100% { opacity: 0; transform: translate(80px, 100px) rotate(-90deg); }
+}
+        
     </style>
 </head>
 <body>
@@ -199,7 +275,14 @@
         
           
         </div>
-          <button class="button" aria-label="Open the love letter">Open</button>
+          <div class="button-container">
+    <button class="button" aria-label="Open the love letter">Open</button>
+    <div class="butterfly"></div>
+    <div class="butterfly"></div>
+    <div class="butterfly"></div>
+    <div class="butterfly"></div>
+</div>
+
     </div>
 
     <audio id="bgMusic" loop>
