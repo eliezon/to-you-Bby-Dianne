@@ -1,474 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>You Are My Everything</title>
-  <style>
-    /* General Styles */
-    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap');
-    body {
-      font-family: 'Dancing Script', cursive;
-      /* background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e); */
-      background-image: url(images1.jpeg);
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      /* background-size: 400% 400%; */
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100%;
-      margin: 0;
-      overflow: hidden;
-      animation: gradientBG 10s ease infinite;
-      position: relative;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox Card</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ffcccc, #ffe6f6); /* Romantic pink-to-lavender gradient */
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden; /* Prevent hearts from scrolling out of view */
+            background-size: cover;
+            background-attachment: fixed; /* Keeps the background fixed while scrolling */
+        }
 
-    .container {
-      text-align: center;
-      background: rgb(255, 0, 106);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      animation: zoomIn 1s ease-in-out;
-    }
+        /* Subtle heart pattern overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"%3E%3Cpath fill="%23ff9999" d="M10 4c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4c0-2.2-1.8-4-4-4zm0 6c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-0.9 2-2 2z"/%3E%3C/svg%3E');
+            background-size: 40px 40px;
+            opacity: 0.1;
+            z-index: 0;
+        }
 
-    .page {
-      display: none;
-      animation: fadeIn 1s ease-in-out;
-    }
+        .inbox-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            z-index: 1; /* Ensure envelope stays above background */
+        }
 
-    .page.active {
-      display: block;
-    }
+        .envelope {
+            width: 100%;
+            height: 100%;
+            background-color: #ffcccb;
+            border: 2px solid #ff9999;
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.5s ease;
+          
+        }
 
-    h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 3rem;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      animation: slideDown 1s ease;
-    }
+        .envelope.open {
+            transform: perspective(500px) rotateX(-20deg);
+        }
 
-    p {
-      font-size: 1.5rem;
-      margin: 10px 0;
-      animation: fadeInText 1.5s ease;
-    }
+        .letter {
+            position: absolute;
+            width: 100%;
+            height: 120%;
+            background-color: #fff;
+            top: 110%;
+            left: 3%;
+            padding: 0 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+            transform: translateY(0);
+            opacity: 0;
+            
+          
+        }
 
-    button {
-      background: rgb(192, 98, 230);
-      color: #fff;
-      border: none;
-      padding: 10px 30px;
-      font-size: 1.2rem;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
+        .letter p {
+            font-size: 12px !important;
+        }
 
-    button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
-    }
+        .envelope.open .letter {
+            transform: translateY(-120%);
+            opacity: 1;
+            z-index: 10;
+        }
 
-    /* Image Gallery */
-    .image-gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 20px;
-      animation: fadeInGallery 2s ease;
-    }
+        .button {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #ff9999;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
 
-    .image-gallery img {
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
+        .button:hover {
+            background-color: #ff6666;
+        }
 
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            opacity: 0;
+            animation: float 3s ease-out infinite;
+        }
 
-    /* Animations */
-    @keyframes gradientBG {
-      0% {
-        background-position: 0% 50%;
-      }
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
 
-      50% {
-        background-position: 100% 50%;
-      }
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
 
-      100% {
-        background-position: 0% 50%;
-      }
-    }
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
+        .tenor-gif-imbed {
+          z-index:-1;
+        }
+        
 
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideDown {
-      from {
-        transform: translateY(-30px);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeInText {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeInGallery {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-  
-  /* Heart Animation */
-    .heart-animation {
-      font-size: 3rem;
-      animation: heartbeat 1.5s infinite;
-      cursor: pointer;
-    }
-
-    /* Background Floating Hearts */
-    .floating-hearts {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .floating-hearts span {
-      position: absolute;
-      display: block;
-      font-size: 20px;
-      animation: float 10s linear infinite, rotateHeart 4s infinite;
-    }
-
-    /* Confetti Animation */
-    .confetti {
-      position: absolute;
-      font-size: 20px;
-      opacity: 0.8;
-      animation: confettiFall 3s linear infinite;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideDown {
-      from { transform: translateY(-30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes fadeInText {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-100vh); opacity: 0; }
-    }
-
-    @keyframes rotateHeart {
-      0% { transform: rotate(0deg); }
-      50% { transform: rotate(20deg); }
-      100% { transform: rotate(0deg); }
-    }
-
-    /* Confetti falling effect */
-    @keyframes confettiFall {
-      0% { top: -10%; opacity: 1; }
-      100% { top: 100%; opacity: 0; }
-    }
-
-    .slider-wrapper {
-      display: flex;
-      gap: 10px;
-      transition: transform 0.5s ease;
-    }
-
-    .slider-wrapper img {
-      width: 100px;
-      height: 100px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    
-    .slider-wrapper img:hover {
-      transform: scale(1.1);
-     
-    }
-
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      max-width: 90%;
-      max-height: 90%;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      padding: 2px 10px;
-      border-radius: 50%;
-      z-index: 1;
-    }
-
-    .close-btn:hover {
-      background-color: rgba(0, 0, 0, 0.9);
-      transform:translate(0,0) !important;
-    }
-    /* Butterfly Animation */
-.button-container {
-  position: relative;
-  display: inline-block;
-}
-
-.butterfly {
-  position: absolute;
-  font-size: 20px;
-  opacity: 0;
-  animation: flyAway 2s linear forwards;
-}
-
-@keyframes flyAway {
-  0% {
-    transform: translate(0, 0);
-    opacity: 1;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--x, 100px), var(--y, -100px));
-    opacity: 0;
-  }
-}
-
-  </style>
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-50px) rotate(-45deg); opacity: 0; }
+        }
+    </style>
 </head>
-
-<body> 
-  <div class="floating-hearts">
-    <span style="left: 10%; animation-duration: 15s;">❤️</span>
-    <span style="left: 20%; animation-duration: 12s;">❤️</span>
-    <span style="left: 30%; animation-duration: 18s;">❤️</span>
-    <span style="left: 40%; animation-duration: 14s;">❤️</span>
-    <span style="left: 50%; animation-duration: 20s;">❤️</span>
-    <span style="left: 60%; animation-duration: 16s;">❤️</span>
-    <span style="left: 70%; animation-duration: 13s;">❤️</span>
-    <span style="left: 80%; animation-duration: 19s;">❤️</span>
-    <span style="left: 90%; animation-duration: 17s;">❤️</span>
-  </div>
-
-  <!-- Falling Heart Confetti -->
-  <div class="confetti" style="left: 5%; animation-delay: 0s;">❤️</div>
-  <div class="confetti" style="left: 15%; animation-delay: 1s;">❤️</div>
-  <div class="confetti" style="left: 25%; animation-delay: 2s;">❤️</div>
-  <div class="confetti" style="left: 35%; animation-delay: 3s;">❤️</div>
-  <div class="confetti" style="left: 45%; animation-delay: 4s;">❤️</div>
-  <div class="confetti" style="left: 55%; animation-delay: 5s;">❤️</div>
-  <div class="confetti" style="left: 65%; animation-delay: 6s;">❤️</div>
-  <div class="confetti" style="left: 75%; animation-delay: 7s;">❤️</div>
-  <div class="confetti" style="left: 85%; animation-delay: 8s;">❤️</div>
-  
-  <div class="container">
-    <div id="page1" class="page active">
-      <h1>Welcome, My Love ❤️</h1>
-      <p>You are the most beautiful person in my life.</p>
-      <br>
-      <button onclick="nextPage(2)" onmouseover="createButterflies(event)">Click to See More</button>
-    </div>
-
-    <div id="page2" class="page">
-      <h1>Beautiful Moments 📸</h1>
-      <p>Here are some memories we made together:</p>
-<div class="image-slider">
-      <div class="slider-wrapper">
-        <img src="d2.jpg" alt="Memory 1" onclick="openModal(this)">
-        <img src="d1.jpg" alt="Memory 2" onclick="openModal(this)">
-        <img src="d3.jpg" alt="Memory 3" onclick="openModal(this)">
-        <img src="d5.jpg" alt="Memory 5" onclick="openModal(this)">
-        <img src="d7.jpg" alt="Memory 6" onclick="openModal(this)">
-        <img src="d6.jpg" alt="Memory 7" onclick="openModal(this)">
-      </div>
-    </div><br>
-      <button onclick="nextPage(3)"onmouseover="createButterflies(event)">Next</button>
-    </div>
-
+<body>
     
     
-    <div id="page3" class="page">
-      <h1>You Are Special 🌟</h1>
-      <p>Every moment with you feels like a dream.</p>
-      <p>Your smile lights up my world.</p>
-      <br>
-      <button onclick="nextPage(4)"onmouseover="createButterflies(event)">Next</button>
+    <div class="inbox-container">
+        <div class="envelope">
+            <div class="letter">
+                <p>Good Morning My Dearest Baby Dianne✨,</p>
+                <p>I want you to know how much you mean to me, every laugh, every moment, and every memory we share fills my heart with unimaginable joy. You are my everything, and I want to remind you that I’m always right here by your side. I will never leave you, no matter what life brings our way. I promise to be with you forever, loving you with all that I am. You’re not just my girlfriend, you’re my partner, my safe haven, and my greatest adventure. I love you more than words can ever express.</p>
+                <p>Forever yours, <br><br> Baby Liezonnnnn 💖😘</p>
+            </div>
+          
+          
+          
+          <div style="display:flex; align-items:start;padding:10px 10px 0 10px">
+          
+          <div class="tenor-gif-embed" data-postid="600921733820226331" data-share-method="host" data-aspect-ratio="1.3806" data-width="32%"></div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+          
+             <div class="tenor-gif-embed" data-postid="11913413585358976580" data-share-method="host" data-aspect-ratio="1" data-width="23%"></div> 
+            
+            
+            
+            <div class="tenor-gif-embed" data-postid="15430766723481101225" data-share-method="host" data-aspect-ratio="1" data-width="23%"></div> 
+            
+            <div class="tenor-gif-embed" data-postid="14057821667428100373" data-share-method="host" data-aspect-ratio="1.21463" data-width="28.3%"></div> 
+       
+          </div>
+          
+          
+          <div style="display:flex;align-items:start;padding:0 10px 0 10px">
+            
+          <div class="tenor-gif-embed" data-postid="6447422845289718142" data-share-method="host" data-aspect-ratio="1.0251" data-width="24%"></div> 
+            
+            <div class="tenor-gif-embed" data-postid="25731506" data-share-method="host" data-aspect-ratio="1" data-width="23.3%"></div>
+            
+            <div class="tenor-gif-embed" data-postid="8826551342857937786" data-share-method="host" data-aspect-ratio="1.0641" data-width="25%"></div> 
+            
+            <div class="tenor-gif-embed" data-postid="13436915817586259025" data-share-method="host" data-aspect-ratio="1.27692" data-width="29.9%"></div> 
+          
+          </div>
+          
+          
+          
+          <div style="display:flex;align-items:start;padding:0 10px 10px 10px">
+            
+            <div class="tenor-gif-embed" data-postid="10644724710938744071" data-share-method="host" data-aspect-ratio="0.562249" data-width="12%"></div>
+            
+            <div class="tenor-gif-embed" data-postid="9445000802704082885" data-share-method="host" data-aspect-ratio="1.49102" data-width="31%"></div>
+            
+            <div class="tenor-gif-embed" data-postid="9820751074643285994" data-share-method="host" data-aspect-ratio="1.76596" data-width="37%"></div> 
+            
+            <div class="tenor-gif-embed" data-postid="5180002678506243041" data-share-method="host" data-aspect-ratio="1" data-width="20.5%"></div>
+            
+          </div>
+          
+        
+          
+        </div>
+        <button class="button">Open</button>
     </div>
-    
-    <div id="page4" class="page">
-      <h1>I Love You So Much 💖</h1>
-      <p>You are my everything, and I can't imagine life without you.</p>
-      <p>Will you make me the happiest person and be my wife?</p>
-      <br>
-      <button onclick="nextPage(5)"onmouseover="createButterflies(event)">Yes, I Will!</button>
-    </div>
 
-    <div id="page5" class="page">
-      <h1>You Said Yes! 🎉</h1>
-      <p>I promise to love you forever and always.</p>
-      <p>You are my soulmate, my best friend, and my future wife.<br><br><span style="font-size:18px;color:rgb(221, 175, 240)"><b>I Love You So
-          Muchh Bby Dianneee</Data><br>Mwaaamwaaaa</b>🤗😚</span><br><br>
-        <span style="font-family:arial;font-size:12px">Your future husband: <span style="color:rgb(221, 175, 240)"><b>Mark Eliezon U.
-            Aniñon</b></span></span>
-      </p>
-      <div class="heart-animation" onmouseover="createButterflies(event)">❤️</div>
-    </div>
-  </div>
-  
-  <div id="imageModal" class="modal">
-    <button class="close-btn" onclick="closeModal()">×</button>
-    <img class="modal-content" id="modalImage">
-  </div>
+    <script>
+        const envelope = document.querySelector('.envelope');
+        const button = document.querySelector('.button');
+        const container = document.querySelector('.inbox-container');
 
-<!-- Add this audio element inside the <body> -->
-  <audio id="bgMusic" loop>
-    <source src="The 1975 - About You (Official).mp3" type="audio/mp3">
-    Your browser does not support the audio tag.
-  </audio>
-  
-  <script>
-    function nextPage(pageNumber) {
-  const pages = document.querySelectorAll('.page');
-  pages.forEach(page => page.classList.remove('active'));
-  const nextPage = document.getElementById(`page${pageNumber}`);
-  nextPage.classList.add('active');
+        // Handle envelope opening/closing
+        button.addEventListener('click', () => {
+            if (envelope.classList.contains('open')) {
+                envelope.classList.remove('open');
+                button.textContent = 'Open';
+            } else {
+                envelope.classList.add('open');
+                button.textContent = 'Close';
+            }
+        });
 
-  // Play music when page 2 is displayed, starting at 30 seconds ahead
-  const bgMusic = document.getElementById('bgMusic');
-  if (pageNumber === 2 && bgMusic.paused) {
-    bgMusic.currentTime = 30; // Start music at 30 seconds
-    bgMusic.play();
-  }
-}
+        // Function to spawn hearts continuously
+        function spawnHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = `${Math.random() * 100}%`; // Random horizontal position
+            container.appendChild(heart);
 
-  </script>
-  
+            // Remove heart after animation to prevent clutter
+            setTimeout(() => {
+                heart.remove();
+            }, 3000); // Match the animation duration (3s)
 
-  <script>  
-    function openModal(imageElement) {
-      const modal = document.getElementById('imageModal');
-      const modalImage = document.getElementById('modalImage');
-      
-      modal.style.display = "flex";
-      modalImage.src = imageElement.src;
-    }
+            // Spawn another heart after a random delay (0.5s to 2s)
+            setTimeout(spawnHeart, 500 + Math.random() * 1000);
+        }
 
-    function closeModal() {
-      const modal = document.getElementById('imageModal');
-      modal.style.display = "none";
-    }
-  </script>
-
-  <script>
-    function createButterflies(event) {
-  const button = event.target;
-  for (let i = 0; i < 10; i++) {
-    const butterfly = document.createElement("span");
-    butterfly.textContent = "🦋"; // Butterfly emoji
-    butterfly.classList.add("butterfly");
-
-    // Random position near button
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * -150;
-    
-    butterfly.style.setProperty("--x", `${x}px`);
-    butterfly.style.setProperty("--y", `${y}px`);
-    butterfly.style.left = `${Math.random() * 100}%`;
-    butterfly.style.top = `${Math.random() * 100}%`;
-
-    button.parentElement.appendChild(butterfly);
-
-    // Remove the butterfly after animation
-    setTimeout(() => {
-      butterfly.remove();
-    }, 2000);
-  }
-}
-
-  </script>
+        // Start spawning hearts when the page loads
+        window.onload = spawnHeart;
+    </script>
 </body>
-
-  </html>
+</html>
