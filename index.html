@@ -236,6 +236,22 @@
 
         // Start spawning hearts when the page loads
         window.onload = spawnHeart;
+
+        window.onload = () => {
+    spawnHeart();
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.currentTime = 30; // Start at 30 seconds
+    bgMusic.play().catch(error => {
+        console.log('Autoplay failed:', error);
+    });
+};
+        
+        
     </script>
+    <audio id="bgMusic" loop>
+    <source src="The 1975 - About You (Official).mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+    </audio>
+    
 </body>
 </html>
