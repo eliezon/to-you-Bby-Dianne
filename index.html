@@ -212,15 +212,25 @@
         const envelope = document.querySelector('.envelope');
         const button = document.querySelector('.button');
         const container = document.querySelector('.inbox-container');
+        const bgMusic = document.getElementById('bgMusic');
+        let isFirstClick = true; // Track if it's the first button click
 
-        // Handle envelope opening/closing
+        // Handle envelope opening/closing and music
         button.addEventListener('click', () => {
             if (envelope.classList.contains('open')) {
                 envelope.classList.remove('open');
                 button.textContent = 'Open';
+                bgMusic.pause(); // Pause music when closing
             } else {
                 envelope.classList.add('open');
                 button.textContent = 'Close';
+                if (isFirstClick) {
+                    bgMusic.currentTime = 30; // Start at 30 seconds on first play
+                    isFirstClick = false;
+                }
+                bgMusic.play().catch(error => {
+                    console.log('Playback failed:', error);
+                });
             }
         });
 
@@ -242,12 +252,8 @@
 
         // Start spawning hearts when the page loads
         window.onload = () => {
-            
-            const bgMusic = document.getElementById('bgMusic');
-            bgMusic.currentTime = 30; // Start at 30 seconds
-            bgMusic.play().catch(error => {
-                console.log('Autoplay failed:', error);
-            });
+            spawnHeart();
+            // Music no longer plays on load, moved to button click
         };
     </script>
     
